@@ -71,8 +71,7 @@ public class LoginView {
                 .userType(UserType.USER)
                 .build();
 
-        return user;
-
+        return loginController.join(user);
     }
 
 

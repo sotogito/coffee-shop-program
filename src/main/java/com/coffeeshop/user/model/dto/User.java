@@ -25,4 +25,8 @@ public class User {
         this.userType = UserType.find(userType);
     }
 
+    public String getUserType(){
+        return this.userType.getValue();
+    }
+
 }

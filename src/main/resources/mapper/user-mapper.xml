@@ -33,4 +33,41 @@
         AND user_password = #{userPassword}
     </select>
 
+    <insert id="join" parameterType="User"
+            useGeneratedKeys="true" keyProperty="userNumber">
+        INSERT INTO
+            tbl_user
+            (
+              user_id
+            , user_password
+            , user_name
+            , user_address
+            , user_phone
+            , created_at
+            )
+        VALUES
+            (
+              #{userId}
+            , #{userPassword}
+            , #{userName}
+            , #{address}
+            , #{phone}
+            , NOW()
+            )
+    </insert>
+
+    <insert id="joinUserType" parameterType="User">
+        INSERT INTO
+            tbl_user_type
+            (
+              user_number
+            , user_type
+            )
+        VALUES
+            (
+              #{userNumber}
+            , #{userType}
+            )
+    </insert>
+
 </mapper>
