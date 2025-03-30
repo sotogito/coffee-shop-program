@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coffeeshop.user.model.dao.UserMapper">
+
+    <resultMap id="userResultMap" type="User">
+        <id     column="user_number"   property="userNumber"/>
+        <result column="user_id"       property="userId"/>
+        <result column="user_password" property="userPassword"/>
+        <result column="user_name"     property="userName"/>
+        <result column="user_address"  property="address"/>
+        <result column="user_phone"    property="phone"/>
+        <result column="user_type"     property="userType"/>
+    </resultMap>
+
+    <select id="login" resultMap="userResultMap">
+        SELECT
+          user_number
+          , user_id
+          , user_password
+          , user_name
+          , user_address
+          , user_phone
+          , (SELECT user_type
+             FROM tbl_user_type
+             WHERE user_number = u.user_number) AS user_type
+        FROM
+            tbl_user u
+        WHERE
+            user_id = #{userId}
+        AND user_password = #{userPassword}
+    </select>
+
+</mapper>
